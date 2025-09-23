@@ -13,10 +13,10 @@ import {
   Put,
 } from '@nestjs/common';
 
-//Chama o método que precisa ser chamado
+// Caminho / rota
 @Controller('/postagens')
 export class PostagemController {
-  // Injeção de dependência
+  // Injeção de dependência da Service
   constructor(private readonly PostagemService: PostagemService) {}
 
   @Get()
@@ -42,6 +42,8 @@ export class PostagemController {
   create(@Body() postagem: Postagem): Promise<Postagem> {
     return this.PostagemService.create(postagem);
   }
+
+  // Body pega o conteúdo do corpo via requisição HTTP
 
   @Put()
   @HttpCode(HttpStatus.OK)

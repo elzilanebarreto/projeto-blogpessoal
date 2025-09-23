@@ -3,15 +3,18 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, ILike, Repository } from 'typeorm';
 import { Postagem } from '../entities/postagem.entity';
 
-@Injectable() //Permite que a classe seja acessada sem criar uma nova instância
+@Injectable() // Torna a classe injetável pelo NestJS
 export class PostagemService {
   // Aqui vem por exemplo: o usuário só pode cadastrar um email único
+
   constructor(
-    @InjectRepository(Postagem)
-    private postagemRepository: Repository<Postagem>,
+    @InjectRepository(Postagem) // Injeta o repositório de acordo com a entidade
+    private postagemRepository: Repository<Postagem>, // Repositório que acessa o DB
   ) {}
 
   // Simula fazer várias coisas ao mesmo tempo, sem parar o sistema, espera uma resposta FORA da aplicação
+
+  // Busca todas as postagens no DB
   async findAll(): Promise<Postagem[]> {
     return await this.postagemRepository.find();
   }
@@ -31,6 +34,7 @@ export class PostagemService {
     return postagem;
   }
 
+  // Busca as postagens pelo título
   async findAllByTitulo(titulo: string): Promise<Postagem[]> {
     return await this.postagemRepository.find({
       where: {
@@ -39,16 +43,19 @@ export class PostagemService {
     });
   }
 
+  // Cria uma nova postagem
   async create(postagem: Postagem): Promise<Postagem> {
     return await this.postagemRepository.save(postagem);
   }
 
+  // Atualiza uma postagem pelo ID
   async update(postagem: Postagem): Promise<Postagem> {
     await this.findById(postagem.id);
 
     return this.postagemRepository.save(postagem);
   }
 
+  // Deleta uma postagem pelo ID
   async delete(id: number): Promise<DeleteResult> {
     await this.findById(id);
 
