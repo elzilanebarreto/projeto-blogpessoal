@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, ILike, Repository } from 'typeorm';
+import { TemaService } from './../../tema/services/tema.service';
 import { Postagem } from '../entities/postagem.entity';
 
 @Injectable() // Torna a classe injetável pelo NestJS
@@ -10,6 +11,7 @@ export class PostagemService {
   constructor(
     @InjectRepository(Postagem) // Injeta o repositório de acordo com a entidade
     private postagemRepository: Repository<Postagem>, // Repositório que acessa o DB
+    private temaService: TemaService,
   ) {}
 
   // Simula fazer várias coisas ao mesmo tempo, sem parar o sistema, espera uma resposta FORA da aplicação
@@ -45,12 +47,16 @@ export class PostagemService {
 
   // Cria uma nova postagem
   async create(postagem: Postagem): Promise<Postagem> {
+    await this.temaService.findById(postagem.tema.id);
+
     return await this.postagemRepository.save(postagem);
   }
 
   // Atualiza uma postagem pelo ID
   async update(postagem: Postagem): Promise<Postagem> {
     await this.findById(postagem.id);
+
+    await this.temaService.findById(postagem.tema.id);
 
     return this.postagemRepository.save(postagem);
   }
