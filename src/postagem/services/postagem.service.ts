@@ -16,9 +16,13 @@ export class PostagemService {
 
   // Simula fazer várias coisas ao mesmo tempo, sem parar o sistema, espera uma resposta FORA da aplicação
 
-  // Busca todas as postagens no DB
+  // Busca todas as postagens no DB e JOIN
   async findAll(): Promise<Postagem[]> {
-    return await this.postagemRepository.find();
+    return await this.postagemRepository.find({
+      relations: {
+        tema: true,
+      },
+    });
   }
 
   // Retornando o resultado atrávez da procura do ID

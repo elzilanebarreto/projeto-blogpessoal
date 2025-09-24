@@ -11,6 +11,7 @@ export class TemaService {
     private temaRepository: Repository<Tema>,
   ) {}
 
+  // Aqui tem o JOIN, por causa do true
   async findAll(): Promise<Tema[]> {
     return await this.temaRepository.find({
       relations: {
