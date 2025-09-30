@@ -1,19 +1,19 @@
-import { JwtAuthGuard } from '../../auth/guard/jst.auth.guard';
-import { Tema } from '../entities/tema.entity';
-import { TemaService } from './../services/tema.service';
 import {
   Body,
   Controller,
+  Delete,
+  Get,
   HttpCode,
   HttpStatus,
-  Get,
   Param,
   ParseIntPipe,
   Post,
   Put,
-  Delete,
   UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../../auth/guard/jwt.auth.guard';
+import { Tema } from '../entities/tema.entity';
+import { TemaService } from './../services/tema.service';
 
 @UseGuards(JwtAuthGuard)
 @Controller('/temas')

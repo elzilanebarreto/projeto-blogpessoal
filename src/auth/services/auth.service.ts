@@ -1,6 +1,6 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsuarioService } from '../../usuario/services/usuario.service';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Bcrypt } from '../bcrypt/bcrypt';
 import { UsuarioLogin } from '../entities/usuariologin.entity';
 
@@ -39,6 +39,10 @@ export class AuthService {
     const buscaUsuario = await this.usuarioService.findByUsuario(
       usuarioLogin.usario,
     );
+
+    if (!buscaUsuario) {
+      throw new HttpException('Usuário não encontrado!', HttpStatus.NOT_FOUND);
+    }
 
     return {
       id: buscaUsuario.id,
