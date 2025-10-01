@@ -1,6 +1,6 @@
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsuarioService } from '../../usuario/services/usuario.service';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Bcrypt } from '../bcrypt/bcrypt';
 import { UsuarioLogin } from '../entities/usuariologin.entity';
 
@@ -43,7 +43,7 @@ export class AuthService {
     return {
       id: buscaUsuario?.id,
       nome: buscaUsuario?.nome,
-      usuario: buscaUsuario?.usuario,
+      usuario: usuarioLogin.usario,
       senha: '',
       foto: buscaUsuario?.foto,
       token: `Bearer ${this.jwtService.sign(payload)}`,
