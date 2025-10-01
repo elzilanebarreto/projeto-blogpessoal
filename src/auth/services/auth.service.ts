@@ -40,16 +40,12 @@ export class AuthService {
       usuarioLogin.usario,
     );
 
-    if (!buscaUsuario) {
-      throw new HttpException('Usuário não encontrado!', HttpStatus.NOT_FOUND);
-    }
-
     return {
-      id: buscaUsuario.id,
-      nome: buscaUsuario.nome,
-      usuario: buscaUsuario.usuario,
+      id: buscaUsuario?.id,
+      nome: buscaUsuario?.nome,
+      usuario: buscaUsuario?.usuario,
       senha: '',
-      foto: buscaUsuario.foto,
+      foto: buscaUsuario?.foto,
       token: `Bearer ${this.jwtService.sign(payload)}`,
     };
   }
