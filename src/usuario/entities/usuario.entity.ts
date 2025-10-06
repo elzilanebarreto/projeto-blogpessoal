@@ -22,11 +22,11 @@ export class Usuario {
   @MinLength(8)
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
-  @ApiProperty()
+  @ApiProperty({ description: 'Precisa ser maior do que 8 caracteres' })
   senha: string;
 
   @Column({ length: 5000 })
-  @ApiProperty()
+  @ApiProperty({ nullable: true })
   foto: string;
 
   @ApiProperty()

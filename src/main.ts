@@ -7,14 +7,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Blog Pessoal')
-    .setDescription('Projeto Blog Pessoal')
+    .setTitle('Blog Pessoal da Elzilane')
+    .setDescription('Projeto Blog Pessoal feito com Nest')
     .setContact(
-      'Generation Brasil',
-      'http://www.generationbrasil.online',
-      'generation@email.com',
+      'Elzilane Barreto',
+      'https://github.com/elzilanebarreto/projeto-blogpessoal',
+      'elzilanebarreto@gmail.com',
     )
-    .setVersion('1.0')
+    .setVersion('v1.0')
     .addBearerAuth()
     .build();
 
