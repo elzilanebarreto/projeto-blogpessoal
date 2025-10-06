@@ -11,13 +11,16 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 import { Postagem } from '../entities/postagem.entity';
 import { PostagemService } from './../services/postagem.service';
 
+@ApiTags('Postagem')
 @UseGuards(JwtAuthGuard)
 // Caminho / rota
 @Controller('/postagens')
+@ApiBearerAuth()
 export class PostagemController {
   // Injeção de dependência da Service
   constructor(private readonly PostagemService: PostagemService) {}
