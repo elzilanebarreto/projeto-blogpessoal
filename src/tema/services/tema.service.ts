@@ -1,8 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, ILike, Repository } from 'typeorm';
 import { Tema } from '../entities/tema.entity';
-import { ILike, Repository } from 'typeorm';
-import { DeleteResult } from 'typeorm/browser';
 
 @Injectable()
 export class TemaService {
@@ -47,8 +46,8 @@ export class TemaService {
     });
   }
 
-  async create(Tema: Tema): Promise<Tema> {
-    return await this.temaRepository.save(Tema);
+  async create(tema: Tema): Promise<Tema> {
+    return await this.temaRepository.save(tema);
   }
 
   async update(tema: Tema): Promise<Tema> {
